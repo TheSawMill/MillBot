@@ -1,5 +1,7 @@
 package bot
 
+import memes "discord-bot/memes"
+
 import (
 	"fmt"
 	"log"
@@ -11,10 +13,15 @@ import (
 )
 
 var BotToken string
+var GifConfigurationKey string
 var commands = []*discordgo.ApplicationCommand{
 	{
 		Name:        "hello",
 		Description: "Replies with Hello World",
+	},
+	{
+		Name:        "random-meme",
+		Description: "Gets a random gif meme",
 	},
 }
 
@@ -56,6 +63,26 @@ func Run() {
 			if err != nil {
 				log.Println("Interaction response error:", err)
 			}
+		case "random-meme":
+			url, err := memes.GetRandomMeme(GifConfigurationKey)
+			if err != nil {
+				s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+					Type: discordgo.InteractionResponseChannelMessageWithSource,
+					Data: &discordgo.InteractionResponseData{
+						Content: "Failed to fetch meme.",
+					},
+				})
+				return
+			}
+			log.Println("Url:", url)
+			// Respond with the GIF
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Content: url,
+				},
+			})
+
 		}
 	})
 

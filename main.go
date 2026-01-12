@@ -1,6 +1,5 @@
 package main
 
-import memes "discord-bot/memes"
 import bot "discord-bot/bot"
 import config "discord-bot/config"
 
@@ -15,7 +14,7 @@ func main() {
 		log.Fatalln("Configuration is nil exiting program.")
 	}
 
-	memes.TestGetRequest()
 	bot.BotToken = configuration.BotToken
+	bot.GifConfigurationKey = configuration.GifyApiKey
 	bot.Run() // call the run function of bot/bot.go
 }
