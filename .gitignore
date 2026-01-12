@@ -1,0 +1,39 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+/bin/
+/build/
+/out/
+
+# Go module files (optional: usually you want to keep go.mod & go.sum)
+/vendor/
+
+# Test binary
+*.test
+
+# IDE/editor files
+*.swp
+*.swo
+*.idea/
+*.vscode/
+*.DS_Store
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+# costom config with api keys
+config.json
